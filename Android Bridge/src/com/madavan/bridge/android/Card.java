@@ -1,4 +1,4 @@
-package com.madavan.bridge;
+package com.madavan.bridge.android;
 
 public class Card implements Comparable<Card> {
 

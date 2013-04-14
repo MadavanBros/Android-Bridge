@@ -1,4 +1,4 @@
-package com.madavan.bridge;
+package com.madavan.bridge.android;
 import java.util.Collections;
 import java.util.Stack;
 
