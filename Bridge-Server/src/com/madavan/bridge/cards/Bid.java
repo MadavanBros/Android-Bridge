@@ -19,6 +19,10 @@ public class Bid implements Comparable<Bid> {
   public Suit getSuit() {
     return _suit;
   }
+  
+  public int getPlayer() {
+	  return _player;
+  }
 
   @Override
   public int compareTo(Bid oth) {
