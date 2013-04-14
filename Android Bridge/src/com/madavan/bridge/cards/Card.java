@@ -1,6 +1,6 @@
 package com.madavan.bridge.cards;
 
-public class Card implements Comparable<Card> {
+public class Card {
 
 	private Rank _rank;
 	private Suit _suit;
@@ -10,6 +10,7 @@ public class Card implements Comparable<Card> {
 		_suit = suit;
 	}
 	
+	/*
 	@Override
 	public int compareTo(Card oth) {
 		int rankCompare = _rank.compareTo(oth.getRank());
@@ -34,7 +35,7 @@ public class Card implements Comparable<Card> {
 		
 		// Default condition (never reached).
 		return rankCompare;
-	}
+	}*/
 	
 	public Rank getRank() {
 		return _rank;
