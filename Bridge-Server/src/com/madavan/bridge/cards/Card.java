@@ -4,13 +4,13 @@ public class Card {
 
 	private Rank _rank;
 	private Suit _suit;
-	private Integer _player;
+	private int _player;
 
 	public Card(Rank rank, Suit suit) {
 		_rank = rank;
 		_suit = suit;
 	}
-	
+
 	public Card(int player, Rank rank, Suit suit) {
 		_player = player;
 		_rank = rank;
@@ -51,23 +51,26 @@ public class Card {
 	public Suit getSuit() {
 		return _suit;
 	}
-	
+
 	public void setPlayer(int player) {
 		_player = player;
 	}
-	
+
 	public int getPlayer() {
 		return _player;
 	}
 
 	@Override
 	public String toString() {
-		return _player.toString() + "," + _rank.toString() + "," + _suit.toString();
+		return _player + "," + _rank.toString() + ","
+				+ _suit.toString();
 	}
 
 	// example message TEN,DIAMONDS
 	public static Card fromString(String str) throws IllegalArgumentException {
 		String[] val = str.split(",");
-		return new Card(Integer.valueOf(val[0]), Rank.valueOf(val[1]), Suit.valueOf(val[2]));
+		return new Card(Integer.valueOf(val[0]), Rank.valueOf(val[1]),
+				Suit.valueOf(val[2]));
 	}
+	
 }
