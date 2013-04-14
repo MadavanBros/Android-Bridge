@@ -4,7 +4,7 @@ package com.madavan.bridge.server;
 import java.util.ArrayList;
 import java.io.IOException;
 
-
+import com.madavan.bridge.cards.Card;
 
 public class BridgeThread extends Thread {
 

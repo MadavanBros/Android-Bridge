@@ -1,3 +1,5 @@
+package com.madavan.bridge.cards;
+
 public class Bid implements Comparable<Bid> {
 
   private Rank _rank;
