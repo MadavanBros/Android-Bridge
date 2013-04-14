@@ -1,4 +1,4 @@
-package com.madavan.bridge.android;
+package com.madavan.bridge.cards;
 
 public enum Suit {
 
