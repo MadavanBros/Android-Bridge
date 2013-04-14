@@ -27,7 +27,7 @@ public class BridgeServer extends Thread {
       while(true) {
         // ArrayList<BridgePlayer> players = new ArrayList<BridgePlayer>();
         // for(int i = 0; i < 4; i++)
-        //  players.put(i, new BridgePlayer(_serverSocket.accept());
+        //  players.put(new BridgePlayer(_serverSocket.accept());
         // new BridgeThread(players);
       }
     } catch(IOException e) {
