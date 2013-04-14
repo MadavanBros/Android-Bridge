@@ -1,7 +1,7 @@
 Android-Bridge
 ==============
 
-Update 4.14.13 9:30 (ashwin):
+Update 4.14.13 9:30 AM (ashwin):
 
 Added the BridgeServer, BridgeThread, and BridgePlayer class. BridgeServer accepts clients as BridgePlayers
 and spawns Bridge Threads once it has 4 players. BridgeThreads then use the BridgePlayers's send, readNext, and
