@@ -33,10 +33,10 @@ public class BridgeServer extends Thread {
       System.out.println("BridgeServer@run: ServerSocket accepting clients.");
       
       while(true) {
-        // ArrayList<BridgePlayer> players = new ArrayList<BridgePlayer>();
-        // for(int i = 0; i < 4; i++)
-        //  players.put(new BridgePlayer(_serverSocket.accept());
-        // new BridgeThread(players);
+        ArrayList<BridgePlayer> players = new ArrayList<BridgePlayer>();
+        for(int i = 0; i < 4; i++)
+          players.put(new BridgePlayer(_serverSocket.accept());
+        new BridgeThread(players);
       }
     } catch(IOException e) {
       System.out.println("BridgeThread@run: " + e.toString());
