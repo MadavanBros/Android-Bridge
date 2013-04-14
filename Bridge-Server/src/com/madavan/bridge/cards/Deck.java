@@ -2,10 +2,9 @@ package com.madavan.bridge.cards;
 import java.util.Collections;
 import java.util.Stack;
 
-
 public class Deck {
 
-  private Stack<Card> _cards;
+  	private Stack<Card> _cards;
 
 	public Deck() {
 		reset();
