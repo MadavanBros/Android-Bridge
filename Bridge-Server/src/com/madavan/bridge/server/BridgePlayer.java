@@ -11,7 +11,7 @@ public class BridgePlayer extends Thread {
   private DataInputStream  _dataIn;
   private Socket _socket;
   
-  public BridgePlayer(Socket socket) {
+  public BridgePlayer(Socket socket) throws IOException {
     _socket = socket;
     
     _dataIn  = new DataInputStream(_socket.getInputStream());
@@ -35,7 +35,7 @@ public class BridgePlayer extends Thread {
    */
   public String readAll() throws IOException {
     String message = "";
-    while(_dataIn.available > 0)
+    while(_dataIn.available() > 0)
       message += _dataIn.readUTF();
     return message;
   }

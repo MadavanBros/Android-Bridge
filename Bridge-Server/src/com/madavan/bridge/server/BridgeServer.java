@@ -12,11 +12,16 @@ public class BridgeServer extends Thread {
   public static void main(String[] args) {
     if(args.length != 1)
       System.out.println("Usage: java BridgeServer port");
-    else
-      new BridgeServer(Integer.parseInt(args[0]).start();
+    else {
+    	try {
+    	      new BridgeServer(Integer.parseInt(args[0])).start();
+    	} catch (IOException e) {
+    		e.printStackTrace();
+    	}
+    }
   }
   
-  public BridgeServer(int port) {
+  public BridgeServer(int port) throws IOException {
     _serverSocket = new ServerSocket(port);
     System.out.println("BridgeServer@constructor: ServerSocket initialized.");
   }
