@@ -1,4 +1,3 @@
-
 public class Bid implements Comparable<Bid> {
 
   private Rank _rank;
@@ -32,6 +31,12 @@ public class Bid implements Comparable<Bid> {
 
   @Override
   public String toString() {
-    return Rank.toString
+    return _rank.toString + "," + _suit.toString();
+  }
+  
+  public static Bid fromString(String str) {
+    String[] val = str.split(",");
+  	return new Bid(Rank.valueOf(val[0]), Suit.valueOf(val[1]));
+  }
 }
 
