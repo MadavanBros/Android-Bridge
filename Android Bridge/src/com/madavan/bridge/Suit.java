@@ -22,12 +22,12 @@ public enum Suit {
 		_isTrump = true;
 	}
 	
-	// Sets this Suit as the Trick card, making sure
-	// to set the current Trick to false.
 	public boolean isTrick() {
 		return _isTrick;
 	}
-	
+
+	// Sets this Suit as the Trick card, making sure
+	// to set the current Trick to false.
 	public void setTrick() {
 		for(Suit s : Suit.values())
 			s.setTrick(false);
