@@ -14,8 +14,8 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="com.madavan.bridge.ClientActivity"
-            android:label="@string/title_activity_client" >
+            android:name="com.madavan.bridge.BridgeActivity"
+            android:label="@string/title_activity_bridge" >
         </activity>
     </application>
 
