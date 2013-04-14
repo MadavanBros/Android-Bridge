@@ -46,12 +46,11 @@ public class Card implements Comparable<Card> {
 	
 	@Override
 	public String toString() {
-		return "CARD:" + _rank.toString() + "," + _suit.toString();
+		return _rank.toString() + "," + _suit.toString();
 	}
 	
-	// example message CARD:TEN,DIAMONDS
+	// example message TEN,DIAMONDS
 	public static Card fromString(String msg) throws IllegalArgumentException {
-		String cmd   = msg.substring(msg.indexOf(":") + 1);
 		String[] val = cmd.split(",");
 		return new Card(Rank.valueOf(val[0]), Suit.valueOf(val[1]));
 	}
