@@ -50,8 +50,8 @@ public class Card implements Comparable<Card> {
 	}
 	
 	// example message TEN,DIAMONDS
-	public static Card fromString(String msg) throws IllegalArgumentException {
-		String[] val = cmd.split(",");
+	public static Card fromString(String str) throws IllegalArgumentException {
+		String[] val = str.split(",");
 		return new Card(Rank.valueOf(val[0]), Suit.valueOf(val[1]));
 	}
 }
