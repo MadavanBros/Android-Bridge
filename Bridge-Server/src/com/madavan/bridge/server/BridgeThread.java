@@ -47,8 +47,11 @@ public class BridgeThread extends Thread {
 	  _deck.shuffle();
 
 	  _curPlayer = _curDealer + 1;
-	  for ( int i = 0; i < 52; i++ )
-		  send((_curPlayer++)%4, Command.CARD, _deck.getNext().toString());
+	  for ( int i = 0; i < 52; i++ ) {
+	  	Card nextCard = _deck.getNext();
+	  	nextCard.setPlayer((_curPlayer)%4);
+	  	send((_curPlayer++) % 4, Command.CARD, nextCard);
+	  }
   }
   
   private void bid() throws IOException {
