@@ -11,6 +11,13 @@ public class BridgeThread extends Thread {
   
   @Override
   public void run() {
+    // Tell players game has begun
+    // Reset, shuffle, and deal deck
     
+    // Bidding
+    //  - Pass is the bid CLUBS,0 (or we could do PASS)
+    //  - Use Rank, Suit compareTo methods
+    
+    // Play Game
   }
 }
