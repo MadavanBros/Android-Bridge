@@ -1,3 +1,5 @@
+package com.madavan.bridge.cards;
+
 public class Bid implements Comparable<Bid> {
 
   private Rank _rank;
@@ -22,8 +24,8 @@ public class Bid implements Comparable<Bid> {
        _rank.compareTo(oth.getRank()) == 0 &&
        _suit.compareTo(oth.getSuit()) >  0)
       return 1;
-    else if(_rank.compareTo(oth.getRank() == 0) &&
-            _suit.compareTo(oth.getSuit() == 0))
+    else if(_rank.compareTo(oth.getRank()) == 0 &&
+            _suit.compareTo(oth.getSuit()) == 0)
       return 0;
     else
       return -1;
@@ -31,7 +33,7 @@ public class Bid implements Comparable<Bid> {
 
   @Override
   public String toString() {
-    return _rank.toString + "," + _suit.toString();
+    return _rank.toString() + "," + _suit.toString();
   }
   
   public static Bid fromString(String str) {
