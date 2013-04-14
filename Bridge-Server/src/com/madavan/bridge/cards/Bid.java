@@ -2,16 +2,18 @@ package com.madavan.bridge.cards;
 
 public class Bid implements Comparable<Bid> {
 
-  private Rank _rank;
+  private Integer _num;
   private Suit _suit;
+  private Integer _player;
 
-  public Bid(Rank rank, Suit suit) {
-    _rank = rank;
+  public Bid(int player, int num, Suit suit) {
+	  _player = player;
+    _num = num;
     _suit = suit;
   }
 
-  public Rank getRank() {
-    return _rank;
+  public int getRank() {
+    return _num;
   }
 
   public Suit getSuit() {
@@ -20,11 +22,11 @@ public class Bid implements Comparable<Bid> {
 
   @Override
   public int compareTo(Bid oth) {
-    if(_rank.compareTo(oth.getRank()) > 0 ||
-       _rank.compareTo(oth.getRank()) == 0 &&
+    if(_num.compareTo(oth.getRank()) > 0 ||
+       _num.compareTo(oth.getRank()) == 0 &&
        _suit.compareTo(oth.getSuit()) >  0)
       return 1;
-    else if(_rank.compareTo(oth.getRank()) == 0 &&
+    else if(_num.compareTo(oth.getRank()) == 0 &&
             _suit.compareTo(oth.getSuit()) == 0)
       return 0;
     else
@@ -33,11 +35,11 @@ public class Bid implements Comparable<Bid> {
 
   @Override
   public String toString() {
-    return _rank.toString() + "," + _suit.toString();
+    return _player.toString() + "," + _num.toString() + "," + _suit.toString();
   }
   
   public static Bid fromString(String str) {
     String[] val = str.split(",");
-    return new Bid(Rank.valueOf(val[0]), Suit.valueOf(val[1]));
+    return new Bid(Integer.valueOf(val[0]), Integer.valueOf(val[1]), Suit.valueOf(val[2]));
   }
 }
