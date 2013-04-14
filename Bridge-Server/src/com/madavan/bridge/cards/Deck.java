@@ -28,7 +28,7 @@ public class Deck {
 
 		for(Rank rank : Rank.values())
 			for(Suit suit : Suit.values())
-				if(suit != Suit.NO_TRUMP)
+				if(!suit.equals(Suit.NO_TRUMP))
 					_cards.push(new Card(rank, suit));
 	}
 }
