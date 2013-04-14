@@ -2,7 +2,7 @@ package com.madavan.bridge.cards;
 
 public enum Suit {
 
-	CLUBS, DIAMONDS, HEARTS, SPADES;
+	CLUBS, DIAMONDS, HEARTS, SPADES, NO_TRUMP;
 	
 	private boolean _isTrump, _isTrick;
 	
