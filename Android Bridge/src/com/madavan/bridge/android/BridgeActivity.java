@@ -51,7 +51,7 @@ public class BridgeActivity extends Activity {
 		protected Void doInBackground(Void... params) {
 			try {
 				while (!_isFinished) {
-					if(_player.ready()) {
+					if(_player.isReady()) {
 						String[] commands = _player.readAll().split("\\.");
 						for (String cmd : commands) {
 						// Do shit for each command
