@@ -29,13 +29,10 @@ public class BridgeThread extends Thread {
 	public void run() {
 		try {
 			// Tell players game has begun
-			dealDeck(); // Reset, shuffle, and deal deck
-
+			// Reset, shuffle, and deal deck
+			dealDeck(); 
 			// Bidding
-			// - Pass is the bid CLUBS,0 (or we could do PASS)
-			// - Use Rank, Suit compareTo methods
 			bid();
-
 			// Play Game
 			play();
 			
@@ -60,11 +57,12 @@ public class BridgeThread extends Thread {
 		_curPlayer = _curDealer;
 		int numPasses = 0;
 		_trumpBid = null;
-		Bid bid = null;
 		ArrayList<Bid> bids = new ArrayList<Bid> ();
+		
 		while (numPasses < 3) {
 			send(_curPlayer, Command.BID_TURN, "");
 			String sbid = _players.get(_curPlayer).readNext();
+			
 			if (sbid.equals("PASS")) {
 				numPasses++;
 				bids.add(null);
@@ -74,17 +72,17 @@ public class BridgeThread extends Thread {
 				numPasses = 0;
 			}
 			else {
-				bid = Bid.fromString(sbid);
+				Bid bid = Bid.fromString(sbid);
 				if (_trumpBid == null || bid.compareTo(_trumpBid) > 0)
 					_trumpBid = bid;
 				bids.add(bid);
 				numPasses = 0;
 			}
-			sendAll(Command.BID, _curPlayer + "," + bid.toString());
+			sendAll(Command.BID, _curPlayer + "," + sbid);
 		}
-		Bid finalBid = bids.get(bids.size()-1);
-		for ( int i = finalBid.getPlayer()%2; i < bids.size(); i+=2 )
-			if ( bids.get(i) != null && finalBid.getSuit().equals(bids.get(i).getSuit()) )
+		
+		for ( int i = _trumpBid.getPlayer()%2; i < bids.size(); i+=2 )
+			if ( bids.get(i) != null && _trumpBid.getSuit().equals(bids.get(i).getSuit()) )
 				_dummy = (bids.get(i).getPlayer()+2)%4;
 	}
 	
@@ -106,8 +104,15 @@ public class BridgeThread extends Thread {
 	}
 	
 	private Card playCard(int player) throws IOException {
-		send(player, Command.PLAY_TURN, "");
-		Card card = Card.fromString(_players.get(player).readNext());
+		Card card = null;
+		if (player != _dummy) {
+			send(player, Command.PLAY_TURN, "");
+			card = Card.fromString(_players.get(player).readNext());
+		}
+		else {
+			send((player+2)%4, Command.PLAY_DUMMY, "");
+			card = Card.fromString(_players.get((player+2)%4).readNext());
+		}
 		sendAll(Command.CARD, player + "," + card.toString());
 		return card;
 	}
