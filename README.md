@@ -1,6 +1,22 @@
 Android-Bridge
 ==============
 
+Update 4.14.13 5:07 PM (avinash):
+
+Set up the BridgeThread class to actually do something. BridgeThread resets the deck, shuffles it, and then
+deals the cards individually to each player. It then gets the bids and plays the Bridge game. Currently, this
+is missing the implementation for a dummy.
+
+Also created messaging system using a Command enumeration. Each command is recognized by the client to perform
+a specific action. Commands may be sent with parameters for the client to accept.
+
+Also began Android client implementation in BridgeActivity.
+
+To Do List
+- Add dummy
+- Complete BridgeActivity code
+- LEARN XML
+
 Update 4.14.13 9:30 AM (ashwin):
 
 Added the BridgeServer, BridgeThread, and BridgePlayer class. BridgeServer accepts clients as BridgePlayers
