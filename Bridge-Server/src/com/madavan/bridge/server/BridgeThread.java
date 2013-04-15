@@ -1,9 +1,9 @@
 package com.madavan.bridge.server;
 
-
 import java.util.ArrayList;
 import java.io.IOException;
 
+import com.madavan.bridge.cards.Bid;
 import com.madavan.bridge.cards.Card;
 import com.madavan.bridge.cards.Deck;
 import com.madavan.bridge.cards.Suit;
@@ -11,77 +11,143 @@ import com.madavan.bridge.support.Command;
 
 public class BridgeThread extends Thread {
 
-  private ArrayList<BridgePlayer> _players;
-  private Deck _deck;
-  private int _curDealer;
-  private int _curPlayer;
-  
-  public BridgeThread(ArrayList<BridgePlayer> players) {
-    _players = players;
-    _deck = new Deck();
-    _curDealer = 0;
-    _curPlayer = 0;
-  }
-  
-  @Override
-  public void run() {
-    // Tell players game has begun
-	  dealDeck(); // Reset, shuffle, and deal deck
-    
-    // Bidding
-    //  - Pass is the bid CLUBS,0 (or we could do PASS)
-    //  - Use Rank, Suit compareTo methods
-    
-    // Play Game
-  }
-  
-  private void dealDeck() {
-	  _deck.reset();
-	  _deck.shuffle();
+	private ArrayList<BridgePlayer> _players;
+	private Deck _deck;
+	private Bid _trumpBid;
+	private int _curDealer;
+	private int _curPlayer;
+	private int _dummy;
 
-	  _curPlayer = _curDealer + 1;
-	  for ( int i = 0; i < 52; i++ )
-		  _players.get((_curPlayer++)%4).send(Command.CARD+":"+_deck.getNext()+".");
-  }
-  
-  private void bid() {
-	  _curPlayer = _curDealer;
-	  int numPasses = 0;
-	  while ( numPasses < 3 ) {
-		  _players.get(_curPlayer).send(Command.BID+":GIVE ME YO BID.");
-		  String sbid = _players.get((_curPlayer++)%4).readNext(); // TRY CATCH BLOCK NEEDED
-		  if (sbid.equals("PASS"))
-			  numPasses++;
-		  else {
-			  String[] bidParts = sbid.split(",");
-			  Suit s = Suit.valueOf(bidParts[0]);
-			  int num = Integer.valueOf(bidParts[1]);
-			  
-			  // Backup check to see if the bid is valid
-			  if ( num <  )
-		  }
-	  }
-  }
-  
-  private int compareCard(Card c1, Card c2, Suit trump, Suit trick) {
-    int rankCompare = _rank.compareTo(oth.getRank());
-    boolean c1Trump = card1.getSuit().equals(trump);
-    boolean c2Trump = card2.getSuit().equals(trump);
-	boolean c1Trick = card1.getSuit().equals(trick);
-    boolean c2Trick = card2.getSuit().equals(trick);
-    
-    if(c1Trump && c2Trump)
-      return rankCompare;
-    else if(c1Trump)
-      return 1;
-    else if(c2Trump)
-      return -1;
-    
-    if(c1Trick && !c2Trick)
-      return 1;
-    else if(!c1Trick && c2Trick)
-      return -1;
-    else
-      return rankCompare;
-  }
+	public BridgeThread(ArrayList<BridgePlayer> players) {
+		_players = players;
+		_deck = new Deck();
+		_curDealer = 0;
+		_curPlayer = 0;
+	}
+
+	@Override
+	public void run() {
+		try {
+			// Tell players game has begun
+			// Reset, shuffle, and deal deck
+			dealDeck(); 
+			// Bidding
+			bid();
+			// Play Game
+			play();
+			
+			_curDealer++;
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	private void dealDeck() throws IOException {
+		_deck.reset();
+		_deck.shuffle();
+
+		_curPlayer = _curDealer + 1;
+		for (int i = 0; i < 52; i++) {
+			Card nextCard = _deck.getNext();
+			nextCard.setPlayer((_curPlayer) % 4);
+			send((_curPlayer++) % 4, Command.DEAL, nextCard.toString());
+		}
+	}
+
+	private void bid() throws IOException {
+		_curPlayer = _curDealer;
+		_trumpBid = null;
+		
+		ArrayList<Bid> bids = new ArrayList<Bid> ();
+		int numPasses = 0;
+		
+		while (numPasses < 3) {
+			send(_curPlayer, Command.BID_TURN, "");
+			String sbid = _players.get(_curPlayer).readNext();
+			
+			if (sbid.equals("PASS")) {
+				bids.add(null);
+				numPasses++;
+			}
+			else if (sbid.equals("DOUBLE")) {
+				bids.add(null);
+				numPasses = 0;
+			}
+			else {
+				Bid bid = Bid.fromString(sbid);
+				_trumpBid = bid;
+				bids.add(bid);
+				numPasses = 0;
+			}
+			sendAll(Command.BID, _curPlayer + "," + sbid);
+		}
+		
+		for ( int i = _trumpBid.getPlayer()%2; i < bids.size(); i+=2 )
+			if ( bids.get(i) != null && _trumpBid.getSuit().equals(bids.get(i).getSuit()) )
+				_dummy = (bids.get(i).getPlayer()+2)%4;
+	}
+	
+	private void play() throws IOException {
+		_curPlayer = _trumpBid.getPlayer();
+		Suit trick;
+		Card card1;
+		Card card2;
+		for ( int i = 0; i < 13; i++ ) {
+			card1 = playCard(_curPlayer++);
+			trick = card1.getSuit();
+			for ( int j = 0; j < 3; j++ ) {
+				card2 = playCard(_curPlayer++);
+				if ( compareCard(card1, card2, _trumpBid.getSuit(), trick) < 0 )
+					card1 = card2;
+			}
+			_curPlayer = card1.getPlayer();
+		}
+	}
+	
+	private Card playCard(int player) throws IOException {
+		Card card = null;
+		if (player != _dummy) {
+			send(player, Command.PLAY_TURN, "");
+			card = Card.fromString(_players.get(player).readNext());
+		}
+		else {
+			send((player+2)%4, Command.PLAY_DUMMY, "");
+			card = Card.fromString(_players.get((player+2)%4).readNext());
+		}
+		sendAll(Command.CARD, player + "," + card.toString());
+		return card;
+	}
+
+	private int compareCard(Card c1, Card c2, Suit trump, Suit trick) {
+		int rankCompare = c1.getRank().compareTo(c2.getRank());
+		boolean c1Trump = c1.getSuit().equals(trump);
+		boolean c2Trump = c2.getSuit().equals(trump);
+		boolean c1Trick = c1.getSuit().equals(trick);
+		boolean c2Trick = c2.getSuit().equals(trick);
+
+		if (c1Trump && c2Trump)
+			return rankCompare;
+		else if (c1Trump)
+			return 1;
+		else if (c2Trump)
+			return -1;
+
+		if (c1Trick && !c2Trick)
+			return 1;
+		else if (!c1Trick && c2Trick)
+			return -1;
+		else
+			return rankCompare;
+	}
+
+	private void send(int player, Command c, String msg) throws IOException {
+		_players.get(player).send(c + ":" + msg + ".");
+	}
+	
+	private void sendAll(Command c, String msg) throws IOException {
+		for ( BridgePlayer p : _players )
+			p.send(c + ":" + msg + ".");
+	}
+
 }

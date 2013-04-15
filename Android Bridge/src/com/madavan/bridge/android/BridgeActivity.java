@@ -1,7 +1,5 @@
 package com.madavan.bridge.android;
 
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
 import java.util.ArrayList;
@@ -33,43 +31,36 @@ public class BridgeActivity extends Activity {
 		private static final String HOST = "serverHost";
 		private static final int PORT = 2221;
 
-		private DataOutputStream _dataOut;
-		private DataInputStream _dataIn;
-		private Socket _socket;
+		private BridgePlayer _player;
 
 		private boolean _isFinished;
 
 		@Override
 		protected void onPreExecute() {
 			super.onPreExecute();
-			
+
 			try {
-				_socket = new Socket(HOST, PORT);
-				_dataIn = new DataInputStream(_socket.getInputStream());
-				_dataOut = new DataOutputStream(_socket.getOutputStream());
+				_player = new BridgePlayer(new Socket(HOST, PORT));
 			} catch (IOException e) {
-				Log.e("BridgeActivity",
-						"BridgeClient@doInBackground: " + e.toString());
+				Log.e("BridgeActivity", "BridgeClient@doInBackground: " + e.toString());
 			}
 		}
 
+		@SuppressWarnings("finally")
 		@Override
 		protected Void doInBackground(Void... params) {
 			try {
 				while (!_isFinished) {
-					String data = "";
-					while (_dataIn.available() > 0)
-						data = _dataIn.readUTF();
-					String[] commands = data.split("\\.");
-
-					for (String cmd : commands) {
+					if(_player.isReady()) {
+						String[] commands = _player.readAll().split("\\.");
+						for (String cmd : commands) {
 						// Do shit for each command
 						// publishProgress(null);
-					}
+						}
+					}					
 				}
 			} catch (IOException e) {
-				Log.e("BridgeActivity",
-						"BridgeClient@doInBackground: " + e.toString());
+				Log.e("BridgeActivity", "BridgeClient@doInBackground: " + e.toString());
 			} finally {
 				return null;
 			}
