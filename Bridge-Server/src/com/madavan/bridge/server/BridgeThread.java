@@ -71,12 +71,14 @@ public class BridgeThread extends Thread {
 			}
 			else if (sbid.equals("DOUBLE")) {
 				bids.add(null);
+				numPasses = 0;
 			}
 			else {
 				bid = Bid.fromString(sbid);
 				if (_trumpBid == null || bid.compareTo(_trumpBid) > 0)
 					_trumpBid = bid;
 				bids.add(bid);
+				numPasses = 0;
 			}
 			sendAll(Command.BID, _curPlayer + "," + bid.toString());
 		}
