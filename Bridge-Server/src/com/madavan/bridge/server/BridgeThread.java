@@ -36,6 +36,8 @@ public class BridgeThread extends Thread {
 			// Play Game
 			play();
 			
+			_curDealer++;
+			
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -55,17 +57,18 @@ public class BridgeThread extends Thread {
 
 	private void bid() throws IOException {
 		_curPlayer = _curDealer;
-		int numPasses = 0;
 		_trumpBid = null;
+		
 		ArrayList<Bid> bids = new ArrayList<Bid> ();
+		int numPasses = 0;
 		
 		while (numPasses < 3) {
 			send(_curPlayer, Command.BID_TURN, "");
 			String sbid = _players.get(_curPlayer).readNext();
 			
 			if (sbid.equals("PASS")) {
-				numPasses++;
 				bids.add(null);
+				numPasses++;
 			}
 			else if (sbid.equals("DOUBLE")) {
 				bids.add(null);
@@ -73,8 +76,7 @@ public class BridgeThread extends Thread {
 			}
 			else {
 				Bid bid = Bid.fromString(sbid);
-				if (_trumpBid == null || bid.compareTo(_trumpBid) > 0)
-					_trumpBid = bid;
+				_trumpBid = bid;
 				bids.add(bid);
 				numPasses = 0;
 			}
