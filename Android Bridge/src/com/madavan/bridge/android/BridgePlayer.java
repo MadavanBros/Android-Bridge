@@ -19,6 +19,11 @@ public class BridgePlayer extends Thread {
     _dataOut = new DataOutputStream(_socket.getOutputStream());
   }
   
+  /**
+   * Returns whether or not there are available bytes to be read.
+   * 
+   * @return data availability
+   */
   public boolean isReady() {
   	if(_dataIn.available() > 0)
   		return true;
