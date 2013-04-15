@@ -19,6 +19,12 @@ public class BridgePlayer extends Thread {
     _dataOut = new DataOutputStream(_socket.getOutputStream());
   }
   
+  public boolean isReady() {
+  	if(_dataIn.available() > 0)
+  		return true;
+  	return false;
+  }
+  
   /**
    * Sends a message string via a DataOutputStream.
    * 
