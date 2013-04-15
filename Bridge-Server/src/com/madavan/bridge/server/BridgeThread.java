@@ -16,6 +16,7 @@ public class BridgeThread extends Thread {
 	private Bid _trumpBid;
 	private int _curDealer;
 	private int _curPlayer;
+	private int _dummy;
 
 	public BridgeThread(ArrayList<BridgePlayer> players) {
 		_players = players;
@@ -60,19 +61,29 @@ public class BridgeThread extends Thread {
 		int numPasses = 0;
 		_trumpBid = null;
 		Bid bid = null;
+		ArrayList<Bid> bids = new ArrayList<Bid> ();
 		while (numPasses < 3) {
 			send(_curPlayer, Command.BID_TURN, "");
 			String sbid = _players.get(_curPlayer).readNext();
-			if (sbid.equals("PASS"))
+			if (sbid.equals("PASS")) {
 				numPasses++;
+				bids.add(null);
+			}
 			else if (sbid.equals("DOUBLE")) {
-			} else {
+				bids.add(null);
+			}
+			else {
 				bid = Bid.fromString(sbid);
 				if (_trumpBid == null || bid.compareTo(_trumpBid) > 0)
 					_trumpBid = bid;
+				bids.add(bid);
 			}
 			sendAll(Command.BID, _curPlayer + "," + bid.toString());
 		}
+		Bid finalBid = bids.get(bids.size()-1);
+		for ( int i = finalBid.getPlayer()%2; i < bids.size(); i+=2 )
+			if ( bids.get(i) != null && finalBid.getSuit().equals(bids.get(i).getSuit()) )
+				_dummy = (bids.get(i).getPlayer()+2)%4;
 	}
 	
 	private void play() throws IOException {
