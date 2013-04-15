@@ -41,12 +41,13 @@ public class BridgeActivity extends Activity {
 			super.onPreExecute();
 
 			try {
-				_player = new BridgePlayer(_socket = new Socket(HOST, PORT));
+				_player = new BridgePlayer(new Socket(HOST, PORT));
 			} catch (IOException e) {
 				Log.e("BridgeActivity", "BridgeClient@doInBackground: " + e.toString());
 			}
 		}
 
+		@SuppressWarnings("finally")
 		@Override
 		protected Void doInBackground(Void... params) {
 			try {
@@ -56,6 +57,7 @@ public class BridgeActivity extends Activity {
 						for (String cmd : commands) {
 						// Do shit for each command
 						// publishProgress(null);
+						}
 					}					
 				}
 			} catch (IOException e) {
