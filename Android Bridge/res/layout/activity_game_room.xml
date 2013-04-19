@@ -8,9 +8,10 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".GameRoomActivity" >
 
-    <ListView android:id="@+id/GameRoomActivity_gameList"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
+    <ListView
+        android:id="@+id/GameRoomActivity_gameList"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:background="@android:color/transparent"
         android:divider="@color/highlight"
         android:dividerHeight="1dp" >
