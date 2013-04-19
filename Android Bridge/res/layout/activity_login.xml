@@ -1,63 +1,38 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/wrapper"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:orientation="vertical"
-    android:background="@color/background"
-    tools:context=".LoginActivity" >
-    
-    <LinearLayout 
-        android:id="@+id/LoginActivity_linearLayout2"
-        android:orientation="vertical"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:gravity="center_horizontal"
-        android:background="@android:color/transparent">
-  	 	
-        <EditText
-            android:id="@+id/username"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:inputType="text"
-            android:hint="@string/prompt_username" >
-       		<requestFocus android:layout_width="match_parent" />
-        </EditText>
-
-        <Button
-            android:id="@+id/signin"
-            android:layout_width="100dp"
-       		android:layout_height="wrap_content"
-       		android:layout_gravity="right"
-            android:singleLine="true"
-            android:text="@string/enter_login" >
-        </Button>
-    </LinearLayout>
-    
-    <RelativeLayout
-        android:id="@+id/linearLayout1"
-        android:orientation="horizontal"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:layout_centerHorizontal="true"
-   	    android:layout_above="@+id/linearLayout2"
-        android:background="@android:color/transparent" >
-
- 	   <ImageView
-    	    android:id="@+id/loginLogo"
-    	    android:layout_width="wrap_content"
-   	     	android:layout_height="wrap_content"
-   	     	android:layout_centerHorizontal="true"
-   	     	android:layout_centerVertical="true"
-   	     	android:contentDescription="@string/login_icon"
-        	android:src="@drawable/ic_launcher" >
- 	   </ImageView>
-    </RelativeLayout>
-
+	    xmlns:tools="http://schemas.android.com/tools"
+	    android:layout_width="fill_parent"
+	    android:layout_height="fill_parent">
+	    
+	<LinearLayout 
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_centerInParent="true"
+	    android:orientation="vertical" >
+	
+	    <ImageView
+	        android:id="@+id/LoginActivity_loginImage"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_gravity="center"
+	        android:src="@drawable/ic_launcher" />
+	
+	    <EditText
+	        android:id="@+id/LoginActivity_usernameText"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_gravity="center"/>
+	
+	    <EditText
+	        android:id="@+id/LoginActivity_passwordText"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_gravity="center"/>
+	
+		<Button
+		    android:id="@+id/LoginActivity_loginButton"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:layout_gravity="center"/>
+		
+	</LinearLayout>
 </RelativeLayout>
