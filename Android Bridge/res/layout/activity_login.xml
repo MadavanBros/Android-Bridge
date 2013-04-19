@@ -8,7 +8,6 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:orientation="vertical"
-    android:background="@color/background"
     tools:context=".LoginActivity" >
     
     <LinearLayout 
@@ -27,12 +26,12 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:inputType="text"
-            android:hint="@string/prompt_username" >
+            android:hint="@string/prompt_username">
        		<requestFocus android:layout_width="match_parent" />
         </EditText>
 
         <Button
-            android:id="@+id/signin"
+            android:id="@+id/LoginActivity_signin_Button"
             android:layout_width="100dp"
        		android:layout_height="wrap_content"
        		android:layout_gravity="right"
@@ -41,24 +40,16 @@
         </Button>
     </LinearLayout>
     
-    <RelativeLayout
-        android:id="@+id/linearLayout1"
-        android:orientation="horizontal"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:layout_centerHorizontal="true"
-   	    android:layout_above="@+id/linearLayout2"
-        android:background="@android:color/transparent" >
-
  	   <ImageView
-    	    android:id="@+id/loginLogo"
+    	    android:id="@+id/LoginActivity_logo_Image"
     	    android:layout_width="wrap_content"
    	     	android:layout_height="wrap_content"
    	     	android:layout_centerHorizontal="true"
    	     	android:layout_centerVertical="true"
    	     	android:contentDescription="@string/login_icon"
-        	android:src="@drawable/ic_launcher" >
+   	    	android:layout_above="@+id/linearLayout2"
+        	android:src="@drawable/ic_launcher"
+        	android:background="@android:color/transparent" >
  	   </ImageView>
-    </RelativeLayout>
 
 </RelativeLayout>
