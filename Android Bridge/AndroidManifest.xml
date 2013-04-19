@@ -17,6 +17,10 @@
             android:name="com.madavan.bridge.android.BridgeActivity"
             android:label="@string/title_activity_bridge" >
         </activity>
+        <activity
+            android:name="com.madavan.bridge.android.LoginActivity"
+            android:label="@string/title_activity_login" >
+        </activity>
     </application>
 
 </manifest>

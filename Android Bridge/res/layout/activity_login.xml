@@ -1,0 +1,59 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/wrapper"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="32dp"
+    android:paddingRight="32dp"
+    android:orientation="vertical"
+    tools:context=".LoginActivity" >
+    
+    <LinearLayout 
+        android:id="@+id/linearLayout2"
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:gravity="center_horizontal">
+  	 	
+        
+        <EditText
+            android:id="@+id/username"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:hint="@string/prompt_username" >
+       		<requestFocus android:layout_width="match_parent" />
+        </EditText>
+
+        <Button
+            android:id="@+id/signin"
+            android:layout_width="100dp"
+       		android:layout_height="wrap_content"
+       		android:layout_gravity="right"
+            android:singleLine="true"
+            android:contentDescription="@string/enter_login"
+            android:text="@string/enter_login" >
+        </Button>
+    </LinearLayout>
+    
+    <RelativeLayout
+        android:id="@+id/linearLayout1"
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_centerHorizontal="true"
+   	    android:layout_above="@+id/linearLayout2" >
+
+ 	   <ImageView
+    	    android:id="@+id/loginLogo"
+    	    android:layout_width="wrap_content"
+   	     	android:layout_height="wrap_content"
+   	     	android:layout_centerHorizontal="true"
+   	     	android:layout_centerVertical="true"
+        	android:src="@drawable/ic_launcher" >
+ 	   </ImageView>
+    </RelativeLayout>
+
+</RelativeLayout>
