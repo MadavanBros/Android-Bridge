@@ -15,7 +15,7 @@
         android:theme="@style/AppTheme" >
         
         <activity
-            android:name="com.madavan.bridge.android.BridgeActivity"
+            android:name="com.madavan.bridge.android.LoginActivity"
             android:label="@string/title_activity_bridge"
             android:screenOrientation="landscape">
             <intent-filter>

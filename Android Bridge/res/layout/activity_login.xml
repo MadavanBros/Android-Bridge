@@ -12,7 +12,7 @@
     tools:context=".LoginActivity" >
     
     <LinearLayout 
-        android:id="@+id/linearLayout2"
+        android:id="@+id/LoginActivity_linearLayout2"
         android:orientation="vertical"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -21,7 +21,6 @@
         android:gravity="center_horizontal"
         android:background="@android:color/transparent">
   	 	
-        
         <EditText
             android:id="@+id/username"
             android:layout_width="fill_parent"
