@@ -30,5 +30,6 @@ public class LoginActivity extends Activity {
 		i.putExtra("username", username);
 		i.putExtra("password", password);
 		startActivity(i);
+		finish();
 	}
 }
