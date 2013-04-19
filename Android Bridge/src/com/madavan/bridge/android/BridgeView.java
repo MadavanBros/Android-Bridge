@@ -1,8 +1,10 @@
 package com.madavan.bridge.android;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Canvas;
 import android.util.AttributeSet;
+import android.util.DisplayMetrics;
 import android.view.GestureDetector;
 import android.view.GestureDetector.SimpleOnGestureListener;
 import android.view.MotionEvent;
@@ -43,5 +45,18 @@ public class BridgeView extends SurfaceView {
 		return _gestureDetector.onTouchEvent(e);
 	}
 	
+	private float convertDpToPixel(int dp) {
+		Resources resources = this.getResources();
+	    DisplayMetrics metrics = resources.getDisplayMetrics();
+	    float px = dp * (metrics.densityDpi/160f);
+	    return px;
+	}
 	
+	private float convertPixelsToDp(float px){
+	    Resources resources = this.getResources();
+	    DisplayMetrics metrics = resources.getDisplayMetrics();
+	    float dp = px / (metrics.densityDpi / 160f);
+	    return dp;
+
+	}
 }
