@@ -13,26 +13,24 @@
 	        android:id="@+id/LoginActivity_loginImage"
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
-	        android:layout_gravity="center"
 	        android:src="@drawable/ic_launcher" />
 	
 	    <EditText
 	        android:id="@+id/LoginActivity_usernameText"
 	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:layout_gravity="center"/>
+	        android:layout_height="wrap_content"/>
 	
 	    <EditText
 	        android:id="@+id/LoginActivity_passwordText"
 	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:layout_gravity="center"/>
+	        android:layout_height="wrap_content"/>
 	
 		<Button
 		    android:id="@+id/LoginActivity_loginButton"
 		    android:layout_width="wrap_content"
 		    android:layout_height="wrap_content"
-		    android:layout_gravity="center"/>
+		    android:text="@string/enter_login"
+		    android:onClick="onLogin"/>
 		
 	</LinearLayout>
 </RelativeLayout>
