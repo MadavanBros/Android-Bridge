@@ -23,7 +23,7 @@ public class BridgeActivity extends Activity {
 
 	@Override
 	public void onStart() {
-
+		super.onStart();
 	}
 
 	public class BridgeClient extends AsyncTask<Void, Void, Void> {
