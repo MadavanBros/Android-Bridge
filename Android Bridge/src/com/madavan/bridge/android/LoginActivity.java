@@ -26,7 +26,7 @@ public class LoginActivity extends Activity {
 		String username = ((TextView) this.findViewById(R.id.LoginActivity_usernameText)).toString();
 		String password = ((TextView) this.findViewById(R.id.LoginActivity_passwordText)).toString();
 		
-		Intent i = new Intent(this, GameRoomActivity.class);
+		Intent i = new Intent(this, BridgeActivity.class);
 		i.putExtra("username", username);
 		i.putExtra("password", password);
 		startActivity(i);
