@@ -53,3 +53,37 @@
     </ImageView>
 
 </RelativeLayout>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:gravity="center"
+    android:orientation="horizontal">
+
+    <ImageView android:id="@+id/LoginActivity_loginImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_launcher"/>
+        
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+            
+            <EditText android:id="@+id/LoginActivity_usernameText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+            
+            <EditText android:id="@+id/LoginActivity_passwordText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+    </LinearLayout>
+    
+    <Button android:id="@+id/LoginActivity_loginButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+        
+</LinearLayout>
