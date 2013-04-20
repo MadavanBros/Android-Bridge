@@ -4,11 +4,11 @@
     <string name="app_name">Bridge</string>
     <string name="title_activity_bridge">BridgeActivity</string>
     <string name="action_settings">Settings</string>
-    <string name="hello_world">Hello world!</string>
     <string name="title_activity_login">Login</string>
-    <string name="enter_login">Sign-in</string>
-    <string name="prompt_username">Username</string>
+    
+    <string name="login_icon">loginIcon</string><string name="prompt_username">Username</string><string name="prompt_password">Password</string><string name="enter_login">Sign-in</string>
     <string name="title_activity_game_room">GameRoomActivity</string>
-    <string name="login_icon">loginIcon</string>
+    
+    
 
 </resources>
