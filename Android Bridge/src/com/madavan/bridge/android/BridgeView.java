@@ -39,6 +39,27 @@ public class BridgeView extends SurfaceView {
 		public boolean onDown(MotionEvent e) {
 			return true;
 		}
+		@Override
+		public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
+			// evaluate e1 to find which card is selected
+			if ( velocityY > 0.1 ) {
+				// send the card
+			}
+			return true;
+		}
+		@Override
+		public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
+			// If e2 position is in the area where it is good then send that card and reset vars
+			if ( SelectedCard._card == null ) {
+				// evaluate e1 to find which card is selected
+				// set x and y accordingly
+			}
+			else {
+				SelectedCard._x += distanceX;
+				SelectedCard._y += distanceY;
+			}
+			return true;
+		}
 	};
 
 	public BridgeView(Context context) {
@@ -59,12 +80,17 @@ public class BridgeView extends SurfaceView {
 	@Override
 	public void draw(Canvas canvas) {
 		for (int i = 0; i < _cards.size(); i++) {
-			_cardImages.get(_cards.get(i));
+			if (!_cards.get(i).equals(SelectedCard._card))
+				_cardImages.get(_cards.get(i));
 		}
 	}
 
 	@Override
 	public boolean onTouchEvent(MotionEvent e) {
+		if ( e.getAction() == MotionEvent.ACTION_UP ) {
+			SelectedCard._card = null;
+			return true;
+		}
 		return _gestureDetector.onTouchEvent(e);
 	}
 
@@ -81,5 +107,15 @@ public class BridgeView extends SurfaceView {
 		float dp = px / (metrics.densityDpi / 160f);
 		return dp;
 
+	}
+	
+	/*
+	 * Hold the selected card (for comparison) and its position to dynamically print the card
+	 * and follow the finger of the user
+	 */
+	private static class SelectedCard {
+		public static Card _card = null;
+		public static int _x;
+		public static int _y;
 	}
 }
